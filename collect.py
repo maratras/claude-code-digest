@@ -197,7 +197,7 @@ def build_digest(hn, reddit, github, npm, youtube):
         lines.append("")
 
     if github:
-        lines += ["## 🚀 GitHub Releases"]
+        lines += ["## 🚀 Релизы на GitHub"]
         for item in github:
             lines.append(f"- **[{item['repo']} {item['tag']}]({item['url']})**")
             if item["note"]:
@@ -215,7 +215,7 @@ def build_digest(hn, reddit, github, npm, youtube):
         for item in hn:
             lines.append(
                 f"- [{item['title']}]({item['url']}) "
-                f"— {item['points']} pts, {item['comments']} комм. "
+                f"— {item['points']} очков, {item['comments']} комм. "
                 f"| [обсуждение]({item['hn_url']})"
             )
         lines.append("")
@@ -249,25 +249,25 @@ def build_digest(hn, reddit, github, npm, youtube):
 
 
 if __name__ == "__main__":
-    print("Fetching HackerNews...")
+    print("Собираю Hacker News...")
     hn = fetch_hackernews()
-    print(f"  {len(hn)} items")
+    print(f"  {len(hn)} записей")
 
-    print("Fetching Reddit...")
+    print("Собираю Reddit...")
     reddit = fetch_reddit()
-    print(f"  {len(reddit)} items")
+    print(f"  {len(reddit)} записей")
 
-    print("Fetching GitHub releases...")
+    print("Собираю релизы GitHub...")
     github = fetch_github_releases()
-    print(f"  {len(github)} items")
+    print(f"  {len(github)} записей")
 
-    print("Fetching npm releases...")
+    print("Собираю npm-пакеты...")
     npm = fetch_npm_releases()
-    print(f"  {len(npm)} items")
+    print(f"  {len(npm)} записей")
 
-    print("Fetching YouTube...")
+    print("Собираю YouTube...")
     youtube = fetch_youtube_anthropic()
-    print(f"  {len(youtube)} items")
+    print(f"  {len(youtube)} записей")
 
     digest = build_digest(hn, reddit, github, npm, youtube)
 
@@ -277,5 +277,5 @@ if __name__ == "__main__":
     with open(path, "w", encoding="utf-8") as f:
         f.write(digest)
 
-    print(f"\nSaved: {path}")
+    print(f"\nСохранено: {path}")
     print(digest[:500])
